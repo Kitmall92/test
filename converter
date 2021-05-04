@@ -1,0 +1,44 @@
+import requests
+
+response = requests.get("https://currate.ru/api/?get=rates&pairs=USDRUB,EURRUB&key=86d1f5189dd65759cc846badb88bfb42")
+json = response.json()
+
+
+what = input("Выберите валюту (USD, EUR, RUB):")
+a = float(input("Введите количество:"))
+what2 = input("В какую перевести (USD, EUR, RUB): ")
+c = (what)
+d = (what2)
+
+
+
+if what == "usd":
+    c = float(json["data"]["USDRUB"])
+
+elif what == "eur":
+    c = float(json["data"]["EURRUB"])
+
+elif what == "rub":
+    c = 1
+    f = float (c) * a * float (d)
+
+if what2 == "usd":
+    d = float(json["data"]["USDRUB"])
+    f = (float(d)/float(c)) * a
+
+elif what2 == "eur":
+    d = float(json["data"]["EURRUB"])
+    f = (float(c)/float(d)) * a
+
+elif what2 == "rub":
+    d = 1
+    f = (float (c) * a) * float (d) 
+
+
+
+
+
+
+print("Итог:" + str(f))
+
+
